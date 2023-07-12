@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+
+<form method="GET" action="">
+	<input type="text" name="search" placeholder="Buscar carro..." />
+	<button type="submit">Buscar</button>
+</form>
+
+<div class="album-grid">
+	{% if albuns %} {% for album in albuns %}
+	<a href="" class="color-red">
+		<div class="car-card">
+			<img src="{{ album.photo.url }}" alt="{{ album.genrer }} - {{ album.artist }}" />
+			<h2>{{ album.artist }} - {{ album.name }}</h2>
+			<p>{{ album.release_year }} - R$ {{ album.value }}</p>
+		</div>
+	</a>
+	{% endfor %} {% else %}
+	<p class="no-results">Nenhum álbum encontrado.</p>
+	{% endif %}
+</div>
+{% endblock %}
