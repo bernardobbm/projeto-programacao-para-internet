@@ -1,95 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<script src="https://cdn.tailwindcss.com"></script>
-		<title>{% block title %}{% endblock %}</title>
-		<style>
-			body {
-				font-family: 'Open Sans', sans-serif;
-				background-color: #f7f7f7;
-				color: #333;
-				margin: 0;
-				padding: 0;
-			}
+<html lang="pt-br">
 
-			header {
-				background-color: #0096c7;
-				color: #fff;
-				text-align: center;
-			}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Caprasimo&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>{% block title %}{% endblock %}</title>
+</head>
 
-			footer {
-				background-color: #ccc;
-				color: #333;
-				padding: 20px;
-				text-align: center;
-			}
+<body class="m-0 p-0 bg-zinc-50 color-zinc-200 h-screen flex flex-col font-['Cabin']">
+  <header class="bg-violet-800/60 text-gray-50 flex justify-between items-center">
+    <nav>
+      <ul class="flex flex-wrap gap-6 p-5">
+        {% if user.is_authenticated %}
+        <li>Olá, {{ user.username }}</li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
+            href="{% url 'albuns_list' %}">Albuns</a>
+        </li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
+            href="{% url 'new_album' %}">Cadastrar
+            album</a></li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
+            href="{% url 'new_artist' %}">Cadastrar
+            artista</a></li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300" href="#">Sair</a></li>
+        {% endif %} {% if not user.is_authenticated %}
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
+            href="{% url 'albuns_list' %}">Albuns</a>
+        </li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
+            href="#">Cadastre-se</a></li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300" href="#">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
 
-			nav {
-				background-color: #0096c7;
-				color: #fff;
-				height: 50px;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-			}
+    <a href="{% url 'home' %}" class="flex items-center gap-4 mx-6">
+      <span>nome do site</span>
+      <img class="w-[40px] h-[40px]" src="../../media/albuns/Positions_de_Ariana_Grande.png" alt="sexo" />
+    </a>
+  </header>
 
-			nav ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-				display: flex;
-			}
+  <main class="flex flex-1 transition-colors">{% block content %} {% endblock %}</main>
 
-			nav ul li {
-				margin: 0 10px;
-			}
+  <footer class="flex justify-center p-6 bg-gray-300">&copy; 2023 Seus albuns favoritos</footer>
+</body>
 
-			nav ul li a {
-				color: #fff;
-				text-decoration: none;
-				font-size: 16px;
-				padding: 15px;
-				transition: all 0.3s ease;
-			}
-
-			nav ul li a:hover {
-				background-color: #32bbe8;
-			}
-
-			nav ul li.active a {
-				background-color: #666;
-			}
-
-			nav ul li.active a:hover {
-				background-color: #999;
-			}
-		</style>
-	</head>
-	<body>
-		<header>
-			<nav>
-				<ul>
-					{% if user.is_authenticated %}
-					<li>Olá, {{ user.username }}</li>
-					<li><a href="#">Carros</a></li>
-					<li><a href="#">Cadastrar Carro</a></li>
-					<li><a href="#">Sair</a></li>
-					{% endif %} {% if not user.is_authenticated %}
-					<li><a href="#">Carros</a></li>
-					<li><a href="#">Cadastre-se</a></li>
-					<li><a href="#">Login</a></li>
-					{% endif %}
-				</ul>
-			</nav>
-		</header>
-
-		<main>{% block content %} {% endblock %}</main>
-
-		<footer>
-			<p>&copy; 2023 Carros novos e Seminovos</p>
-		</footer>
-	</body>
 </html>
