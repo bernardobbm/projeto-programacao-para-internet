@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  div form label {
+    font-size: medium;
+  }
+
+  div form input,
+  select {
+    background-color: #d4d4d8;
+    border-radius: 0.25rem;
+    width: 300px;
+    padding: 0 5px;
+  }
+
+  textarea:focus,
+  input:focus,
+  select:focus {
+    outline-color: #a78bfa;
+  }
+</style>
+
+<div class="flex items-center justify-center">
+  <form class="flex flex-col justify-center mt-10 gap-2" method="post">
+    {% csrf_token %}
+    <div class="flex flex-col">
+      <label>Usuário: </label>
+      {{ user_form.username }}
+      <div class="text-xs text-red-400">
+        {{ user_form.username.errors }}
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <label>Senha: </label>
+      {{ user_form.password1 }}
+      <div class="text-xs text-red-400">
+        {{ user_form.password1.errors }}
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <label>Confirmação de Senha: </label>
+      {{ user_form.password2 }}
+      <div class="text-xs text-red-400">
+        {{ user_form.password2.errors }}
+      </div>
+    </div>
+
+    <button
+      class="bg-violet-400 hover:bg-violet-500/80 text-white rounded mt-4 self-center p-2 cursor-pointer transition-colors ease-in-out delay-150 duration-300 w-[150px]"
+      type="submit">Cadastrar</button>
+  </form>
+</div>
+{% endblock %}

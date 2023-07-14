@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  div form label {
+    font-size: medium;
+  }
+
+  div form input,
+  select {
+    background-color: #d4d4d8;
+    border-radius: 0.25rem;
+    width: 300px;
+    padding: 0 5px;
+  }
+
+  textarea:focus,
+  input:focus,
+  select:focus {
+    outline-color: #a78bfa;
+  }
+</style>
+
+<div class="flex items-center justify-center">
+  <form class="flex flex-col justify-center mt-10" method="post">
+    {% csrf_token %}
+
+    {{ login_form }}
+
+    <button
+      class="bg-violet-400 hover:bg-violet-500/80 text-white rounded mt-4 self-center p-2 cursor-pointer transition-colors ease-in-out delay-150 duration-300 w-[150px]"
+      type="submit">Logar</button>
+  </form>
+</div>
+
+{% endblock %}
