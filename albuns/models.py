@@ -14,7 +14,7 @@ class Album(models.Model):
     genrer = models.CharField(max_length=200)
     artist = models.ForeignKey(Artist, on_delete=models.PROTECT, related_name='album_artist')
     release_year = models.IntegerField(blank=True, null=True)
-    value = models.FloatField(blank=True, null=True)
+    number_of_sales = models.IntegerField(blank=True, null=True)
     photo = models.ImageField(upload_to= 'albuns/', blank=True, null=True)
 
     def __str__(self):

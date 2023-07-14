@@ -1,18 +1,74 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
+<style>
+  div form label {
+    font-size: medium;
+  }
 
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <h1>Editar album</h1>
-  <table>
-    {{ form.as_table }}
-  </table>
-  <div>
-    <div class="buttons-container">
-      <input type="submit" value="Salvar Alterações">
-      <a href="{% url 'albuns_list' %}" class="btn btn-secondary">Cancelar</a>
+  div form input[type="text"],
+  input[type="number"],
+  select {
+    background-color: #d4d4d8;
+    border-radius: 0.25rem;
+    width: 300px;
+    padding: 0 5px;
+  }
+
+  div form input[type='file'] {
+    background-color: transparent;
+  }
+
+  textarea:focus,
+  input:focus,
+  select:focus {
+    outline-color: #a78bfa;
+  }
+
+  div form a {
+    color: #a78bfa
+  }
+</style>
+
+<div class="flex flex-col items-center mt-6">
+  <h2>Editar album:</h2>
+
+  <form class="flex flex-col items-center" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for field in form %}
+
+    {% if field != form.photo %}
+    <div class="flex flex-col mt-2">
+      {{ field.label_tag }} {{ field }}
+
+      {% for error in field.errors %}
+      <p class="text-red-400 text-xs">{{ error }}</p>
+      {% endfor %}
     </div>
-  </div>
-</form>
+    {% endif %}
+    {% endfor %}
+
+    {% for field in form %}
+    {% if field == form.photo %}
+    <div class="flex items-center gap-6 mt-6">
+      {{ field.label_tag }}
+      <div>
+        {{ field }}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+
+    <div class="flex gap-4 mb-8 self-center">
+      <button
+        class="bg-violet-400 hover:bg-violet-500/80 text-white rounded mt-8 self-center p-2 cursor-pointer transition-colors ease-in-out delay-150 duration-300"
+        type="submit">
+        Salvar Alterações
+      </button>
+      <a class="bg-zinc-300 hover:bg-zinc-400/80 text-violet-400 hover:text-violet-500/80 rounded mt-8 self-center p-2 cursor-pointer transition-colors ease-in-out delay-150 duration-300"
+        href="{% url 'albuns_list' %}">Cancelar</a>
+    </div>
+  </form>
+</div>
 {% endblock %}

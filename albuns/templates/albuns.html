@@ -2,7 +2,7 @@
 
 <div class="flex flex-col items-center gap-10 w-screen">
   <form class="mt-10" method="GET" action="{% url 'albuns_list' %}">
-    <input class="bg-zinc-300 rounded p-2 outline-none" type="text" name="search" placeholder="Buscar album..." />
+    <input class="bg-zinc-300 rounded p-2 outline-violet-400" type="text" name="search" placeholder="Buscar album..." />
     <button
       class="bg-violet-400 hover:bg-violet-500/80 text-white p-2 rounded transition-colors ease-in-out delay-150 duration-300"
       type="submit">Buscar</button>
@@ -11,12 +11,13 @@
   <div class="flex justify-center flex-wrap gap-y-10 max-w-7xl">
     {% if albuns %} {% for album in albuns %}
     <a href="{% url 'album_detail' album.pk %}"
-      class="text-white flex items-center bg-violet-400 hover:bg-violet-500/80 mx-4 rounded overflow-hidden shadow-xl hover:shadow-2xl transition-all ease-in-out delay-150 duration-300 ">
+      class="text-white flex items-center bg-violet-400 hover:bg-violet-500/80 mx-4 rounded overflow-hidden shadow-xl hover:shadow-2xl transition-all ease-in-out delay-150 duration-300 min-w-[300px]">
       <img class="w-[80px] h-[80px]" src="{{ album.photo.url }}" alt="{{ album.genrer }} - {{ album.artist }}" />
 
       <div class="flex flex-wrap flex-col px-2">
         <h2>{{ album.artist }} - {{ album.name }}</h2>
-        <p>{{ album.release_year }} - R$ {{ album.value }}</p>
+        <p>{{ album.release_year }}</p>
+        <p>Vendas: {{ album.number_of_sales }}</p>
       </div>
     </a>
     {% endfor %} {% else %}

@@ -1,12 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Adicione um novo artista abaixo:</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" value="Cadastrar">
-</form>
+<style>
+  div form label {
+    font-size: medium;
+  }
+
+  div form input {
+    background-color: #d4d4d8;
+    border-radius: 0.25rem;
+    width: 300px;
+    padding: 0 5px;
+  }
+
+  textarea:focus,
+  input:focus {
+    outline-color: #a78bfa;
+  }
+</style>
+
+<div class="flex flex-col items-center gap-8 mt-8">
+  <h2>Adicione um novo artista abaixo:</h2>
+
+  <form class="flex flex-col" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+
+    <button
+      class="bg-violet-400 hover:bg-violet-500/80 text-white rounded mt-8 self-center w-[200px] p-2 cursor-pointer transition-colors ease-in-out delay-150 duration-300"
+      type="submit">Cadastrar</button>
+  </form>
+</div>
 {% endblock %}

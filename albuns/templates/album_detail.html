@@ -1,15 +1,27 @@
 {% extends "base.html" %} {% block content %}
-<div class="car-card">
-  <img src="{{ object.photo.url }}" alt="{{ object.model }} - {{ object.brand }}" />
-  <h2>{{ object.artist }}</h2>
-  <p><strong>Nome:</strong> {{ album.name }}</p>
-  <p><strong>Gênero:</strong> {{ object.genrer }}</p>
-  <p><strong>Ano de lançamento:</strong> {{ object.release_year }}</p>
-  <p><strong>Preço:</strong> R$ {{ object.value }}</p>
-</div>
+<div class="flex items-center justify-center gap-10">
+  <div class="flex flex-col items-center mt-6">
+    <div
+      class="flex flex-col gap-4 bg-violet-400 hover:bg-violet-500/80 p-2 rounded-xl transition-colors ease-in-out delay-150 duration-300">
+      <img class="w-[300px] h-[300px] rounded-xl" src="{{ object.photo.url }}"
+        alt="{{ object.model }} - {{ object.brand }}" />
 
-{% if user.is_authenticated %}
-<div class="buttons-container">
-  <a href="{% url 'album_update' pk=object.pk %}" class="">Editar</a>
+      <div class="self-start text-white">
+        <h2><strong>{{ object.artist }}</strong></h2>
+        <p><strong>Nome:</strong> {{ album.name }}</p>
+        <p><strong>Gênero:</strong> {{ object.genrer }}</p>
+        <p><strong>Ano de lançamento:</strong> {{ object.release_year }}</p>
+        <p><strong>Vendas:</strong> {{ object.number_of_sales }}</p>
+      </div>
+    </div>
+  </div>
+
+  {% if user.is_authenticated %}
+  <div>
+    <a class="bg-violet-400 hover:bg-violet-500/80 text-white rounded mt-8 self-center p-2 cursor-pointer transition-colors ease-in-out delay-150 duration-300"
+      href="{% url 'album_update' pk=object.pk %}">Editar</a>
+    <a class="bg-red-400 hover:bg-red-500/80 text-white rounded mt-8 self-center p-2 cursor-pointer transition-colors ease-in-out delay-150 duration-300"
+      href="{% url 'album_delete' pk=object.pk %}">Deletar album</a>
+  </div>
 </div>
 {% endif %} {% endblock %}

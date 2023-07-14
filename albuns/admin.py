@@ -10,7 +10,7 @@ class ArtistAdmin(admin.ModelAdmin):
 admin.site.register(Artist, ArtistAdmin)
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('genrer', 'name', 'artist', 'release_year', 'value')
+    list_display = ('genrer', 'name', 'artist', 'release_year', 'number_of_sales')
     search_fields = ('genrer', 'artist')
 
 #registrar
