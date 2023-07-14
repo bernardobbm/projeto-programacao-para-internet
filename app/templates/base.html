@@ -12,7 +12,7 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body class="m-0 p-0 bg-zinc-50 color-zinc-200 h-screen flex flex-col font-['Cabin']">
+<body class="m-0 p-0 bg-zinc-50 color-zinc-200 h-screen flex flex-col font-['Cabin'] min-h-[100vh] flex flex-col">
   <header class="bg-violet-800/60 text-gray-50 flex justify-between items-center">
     <nav>
       <ul class="flex flex-wrap gap-6 p-5">
@@ -27,28 +27,33 @@
         <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
             href="{% url 'new_artist' %}">Cadastrar
             artista</a></li>
-        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300" href="#">Sair</a></li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
+            href="{% url 'logout' %}">Sair</a></li>
         {% endif %} {% if not user.is_authenticated %}
         <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
             href="{% url 'albuns_list' %}">Albuns</a>
         </li>
         <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
-            href="#">Cadastre-se</a></li>
-        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300" href="#">Login</a>
+            href="{% url 'register' %}">Cadastre-se</a></li>
+        <li><a class="hover:text-purple-800 transition-colors ease-in-out delay-150 duration-300"
+            href="{% url 'login' %}">Login</a>
         </li>
         {% endif %}
       </ul>
     </nav>
 
     <a href="{% url 'home' %}" class="flex items-center gap-4 mx-6">
-      <span>nome do site</span>
-      <img class="w-[40px] h-[40px]" src="../../media/albuns/Positions_de_Ariana_Grande.png" alt="sexo" />
+      <span>Songvault</span>
+
+      {% load static %}
+      <img class="w-[40px] h-[40px]" src="https://cdn-icons-png.flaticon.com/512/3355/3355318.png"
+        alt="Icone do Site" />
     </a>
   </header>
 
-  <main class="flex flex-1 transition-colors">{% block content %} {% endblock %}</main>
+  <main class="transition-colors">{% block content %} {% endblock %}</main>
 
-  <footer class="flex justify-center p-6 bg-gray-300">&copy; 2023 Seus albuns favoritos</footer>
+  <footer class="flex justify-center p-6 bg-gray-300 mt-auto">&copy; 2023 Seus albuns favoritos</footer>
 </body>
 
 </html>
